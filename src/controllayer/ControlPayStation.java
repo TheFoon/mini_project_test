@@ -8,7 +8,7 @@ import databaselayer.IDbPBuy;
 import databaselayer.DatabasePBuy;
 
 /**
- * Inspired by the book: Flexible, Reliable Software Henrik Bærbak Christensen:
+ * Inspired by the book: Flexible, Reliable Software Henrik Bï¿½rbak Christensen:
  * Flexible, Reliable Software. Taylor and Francis Group, LLC 2010
  */
 
@@ -43,6 +43,12 @@ public class ControlPayStation {
 
 	// Process the buy
 	public PReceipt buy() throws DatabaseLayerException {
+		if(payStation.getAmount() == 0)
+		{
+			//We could display an error message later.
+			System.out.println("ERROR: No money inserted! Cannot buy.");
+			return null;
+		}
 		LocalDate currentTime = java.time.LocalDate.now();
 		
 		// create buy

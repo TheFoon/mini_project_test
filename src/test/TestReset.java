@@ -7,7 +7,7 @@ import controllayer.*;
 import modellayer.*;
 
 /**
- * Inspired by the book: Flexible, Reliable Software Henrik Bærbak Christensen:
+ * Inspired by the book: Flexible, Reliable Software Henrik Bï¿½rbak Christensen:
  * Flexible, Reliable Software. Taylor and Francis Group, LLC 2010
  */
 
@@ -26,7 +26,11 @@ public class TestReset {
 	 */
 	@Test
 	public void shouldClearAfterBuy() throws IllegalCoinException, Exception {
-		//
+		ps.addPayment(1, Currency.ValidCurrency.EURO, Currency.ValidCoinType.INTEGER);
+		
+		ps.buy();
+		
+		assertEquals("Display should be 0 after buy", 0, ps.readDisplay());
 	}
 
 	/**
@@ -34,6 +38,10 @@ public class TestReset {
 	 */
 	@Test
 	public void shouldClearAfterCancel() throws IllegalCoinException {
-		//
+		ps.addPayment(1, Currency.ValidCurrency.EURO, Currency.ValidCoinType.INTEGER);
+		
+		ps.cancel();
+		
+		assertEquals("Display should be 0 after buy", 0, ps.readDisplay());
 	}
 }
