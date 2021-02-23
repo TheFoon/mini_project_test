@@ -13,8 +13,8 @@ public class PZone {
 	}
 	
 	// Dynamicallt set parkingzone
-	public PZone(int pZoneIdent, String pZoneName) {
-		this.id = pZoneIdent;
+	public PZone(int pZoneId, String pZoneName) {
+		this.id = pZoneId;
 		this.name = pZoneName;
 	}	
 	

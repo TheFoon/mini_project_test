@@ -32,6 +32,7 @@ public class DatabasePBuy implements IDbPBuy {
 			ResultSet rs = stmt.getGeneratedKeys();
 		    if (rs.next()) {
 		    	insertedKey = rs.getInt(1);
+		    	parkingBuy.setId(insertedKey);
 		    }
 		    stmt.close();
 		} catch (SQLException ex) {
@@ -66,14 +67,14 @@ public class DatabasePBuy implements IDbPBuy {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 
-		String baseDelete = "delete from PBuy where id = ?";
+		String baseDelete = "delete from PBuy where id = " + parkingBuy.getId();
 		System.out.println(baseDelete);
 
 		try {
 			con = DBConnection.getInstance().getDBcon();
-			pstmt = con.prepareStatement(baseDelete);
-			pstmt.setLong(1, parkingBuy.getId());
-			numRowsDeleted = pstmt.executeUpdate();
+			Statement stmt = con.createStatement();
+			stmt.setQueryTimeout(5);
+			numRowsDeleted = stmt.executeUpdate(baseDelete);
 		} catch (SQLException ex) {
 			numRowsDeleted = -1;
 			DatabaseLayerException dle = new DatabaseLayerException("Error deleting data");

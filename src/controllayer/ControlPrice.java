@@ -4,6 +4,7 @@ import databaselayer.DatabaseLayerException;
 import databaselayer.IDbPPrice;
 import databaselayer.DatabasePPrice;
 import modellayer.PPrice;
+import modellayer.PZone;
 
 public class ControlPrice {
 	
@@ -20,10 +21,10 @@ public class ControlPrice {
 		return currentPrice;
 	}
 	
-	public PPrice getPriceRemote(int zoneId) throws DatabaseLayerException {
+	public PPrice getPriceRemote(PZone zone) throws DatabaseLayerException {
 		
 		// Get price from Parkingsystem DB
-		PPrice readPrice = dbPrice.getPriceByZoneId(zoneId);
+		PPrice readPrice = dbPrice.getPriceByZone(zone);
 		//
 		return readPrice;
 	}

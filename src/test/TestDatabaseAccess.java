@@ -18,7 +18,7 @@ import controllayer.*;
 //import static org.junit.Assert.*;
 
 /**
- * Inspired by the book: Flexible, Reliable Software Henrik Bærbak Christensen:
+ * Inspired by the book: Flexible, Reliable Software Henrik Bï¿½rbak Christensen:
  * Flexible, Reliable Software. Taylor and Francis Group, LLC 2010
  */
 
@@ -48,7 +48,7 @@ public class TestDatabaseAccess {
 	
 	
 	@Test
-	public void wasInsertedBuy() {
+	public void wasInsertedBuy() throws DatabaseLayerException {
 		
 		// Arrange
 		LocalDate timeNow = java.time.LocalDate.now();
@@ -64,40 +64,42 @@ public class TestDatabaseAccess {
 		DatabasePBuy dbPbuy = new DatabasePBuy();
 		
 		// Act
-		int key = 0; //TODO: Call dbPbuy
+		int key = dbPbuy.insertParkingBuy(tempPBuy); //TODO: Call dbPbuy
 		
 		// Assert
-		assertEquals("Dummy", key > 0);
+		assertEquals("Assert correct key", true, key > 0);
 		
 	}	
 	
 	
 	@Test
-	public void wasRetrievedPriceDatabaselayer() {
+	public void wasPriceRetrievedDatabaselayer() throws DatabaseLayerException {
 		// Arrange
 		PPrice foundPrice = null;
-		int pZoneId = 2;
+		PZone pZone = new PZone(2, "Zone B");
 		DatabasePPrice dbPrice = new DatabasePPrice();
 
-		
 		// Act
-
+		foundPrice = dbPrice.getPriceByZone(pZone);
+		
 		// Assert
-		assertEquals("Dummy", 0, 1);
+		assertEquals("Get price", 25, foundPrice.getParkingPrice());
 		
 	}
 	
 	
 	@Test
-	public void wasRetrievedPriceControllayer() {
-
+	public void wasPriceRetrievedControllayer() throws DatabaseLayerException {
 		// Arrange
+		PPrice foundPrice = null;
+		PZone pZone = new PZone(2, "Zone B");
+		ControlPrice conPrice = new ControlPrice();
 
-		
 		// Act
-
+		foundPrice = conPrice.getPriceRemote(pZone);
+		
 		// Assert
-		assertEquals("Dummy", 0, 1);
+		assertEquals("Get price", 25, foundPrice.getParkingPrice());
 		
 	}	
 	

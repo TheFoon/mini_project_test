@@ -3,9 +3,10 @@ package test;
 import org.junit.*;
 
 import controllayer.*;
+import modellayer.Currency;
 
 /**
- * Inspired by the book: Flexible, Reliable Software Henrik Bærbak Christensen:
+ * Inspired by the book: Flexible, Reliable Software Henrik Bï¿½rbak Christensen:
  * Flexible, Reliable Software. Taylor and Francis Group, LLC 2010
  */
 
@@ -26,11 +27,11 @@ public class TestIllegalCoin {
 	// Norwegian coin
 	@Test(expected = IllegalCoinException.class)
 	public void shouldRejectIllegalCurrencyNokCoin() throws IllegalCoinException {
-		//
+		ps.addPayment(1, Currency.ValidCurrency.NOK, Currency.ValidCoinType.INTEGER);
 	}
 	// unknown Euro coin value
 	@Test(expected = IllegalCoinException.class)
 	public void shouldRejectIllegalEuroCoin() throws IllegalCoinException {
-		//
+		ps.addPayment(3, Currency.ValidCurrency.EURO, Currency.ValidCoinType.INTEGER);
 	}
 }
